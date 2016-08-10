@@ -5,7 +5,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace HomeCinema.Data
 {
-    internal class HomeCinemaContext : DbContext
+    public class HomeCinemaContext : DbContext
     {
         public HomeCinemaContext() : base("HomeCinema")
         {
