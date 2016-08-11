@@ -2,6 +2,7 @@
 using HomeCinema.Entities;
 using System;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -74,14 +75,14 @@ namespace HomeCinema.Data.Repositories
 
         #endregion
 
-        public IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
             return DbContext.Set<T>();
         }
 
-        public IQueryable<T> All => GetAll();
+        public virtual IQueryable<T> All => GetAll();
 
-        public IQueryable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties)
+        public virtual IQueryable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = DbContext.Set<T>();
             foreach (var includeProperty in includeProperties)
@@ -95,29 +96,38 @@ namespace HomeCinema.Data.Repositories
 
 
 
-        public T GetSingle(int id)
+        public virtual T GetSingle(int id)
         {
-            throw new NotImplementedException();
+            return GetAll().FirstOrDefault(x => x.ID == id);
         }
 
-        public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
+        public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return DbContext.Set<T>().Where(predicate);
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
-            throw new NotImplementedException();
+            DbEntityEntry dbEntityEntry = DbContext.Entry<T>(entity);
+            DbContext.Set<T>().Add(entity);
+            dbEntityEntry.State = EntityState.Added;
+
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
-            throw new NotImplementedException();
+            DbEntityEntry dbEntityEntry = DbContext.Entry<T>(entity);
+            DbContext.Set<T>().Remove(entity);
+            dbEntityEntry.State = EntityState.Deleted;
         }
 
-        public void Edit(T entity)
+        public virtual void Edit(T entity)
         {
-            throw new NotImplementedException();
+            DbEntityEntry dbEntityEntry = DbContext.Entry<T>(entity);
+            dbEntityEntry.State = EntityState.Modified;
+
+
+
         }
     }
 }
