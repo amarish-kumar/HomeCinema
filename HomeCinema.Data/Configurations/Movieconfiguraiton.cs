@@ -15,7 +15,7 @@ namespace HomeCinema.Data.Configurations
             Property(m => m.Producer).IsRequired().HasMaxLength(50);
             Property(m => m.Rating).IsRequired();
             Property(m => m.Description).IsRequired().HasMaxLength(2000);
-            Property(m => m.TrailerUrl).IsRequired().HasMaxLength(200);
+            Property(m => m.TrailerURI).IsRequired().HasMaxLength(200);
             HasMany(m => m.Stocks).WithRequired().HasForeignKey(s => s.MovieId);
         }
     }
