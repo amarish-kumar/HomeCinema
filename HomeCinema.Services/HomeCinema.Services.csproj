@@ -40,7 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IEncryptionService.cs" />
+    <Compile Include="Abstract\IMembershipService.cs" />
+    <Compile Include="EncryptionService.cs" />
+    <Compile Include="MembershipContext.cs" />
+    <Compile Include="MembershipService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HomeCinema.Data\HomeCinema.Data.csproj">
+      <Project>{39b4f021-8a61-4a40-b0a5-f7a4f0d637cd}</Project>
+      <Name>HomeCinema.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCinema.Entities\HomeCinema.Entities.csproj">
+      <Project>{37e3b095-3064-4d9a-8454-3a0cd607ede7}</Project>
+      <Name>HomeCinema.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
