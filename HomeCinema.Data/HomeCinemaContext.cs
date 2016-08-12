@@ -10,6 +10,8 @@ namespace HomeCinema.Data
         public HomeCinemaContext() : base("name=HomeCinema")
         {
             Database.SetInitializer<HomeCinemaContext>(null);
+            
+
         }
 
         #region
